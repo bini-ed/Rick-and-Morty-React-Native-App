@@ -15,7 +15,6 @@ import Earth from '../assets/location/earth.png';
 import Logo from '../assets/location/logo.png';
 import Location1 from '../assets/location/location1.png';
 import Location2 from '../assets/location/location2.png';
-import Carousel from 'react-native-reanimated-carousel';
 import {getEpisodeService} from '../services/episodeService';
 import CustomCarousel from '../components/CustomCarousel';
 import AppText from '../components/AppText';

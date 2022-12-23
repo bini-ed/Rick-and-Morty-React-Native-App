@@ -1,14 +1,6 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
-import Search from '../assets/search.png';
 import AppColor from '../config/color';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
@@ -40,7 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.primary,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-    color: 'grey',
+    color: 'whitesmoke',
     flex: 0.8,
     height: 45,
   },

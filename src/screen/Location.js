@@ -1,69 +1,31 @@
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, FlatList, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {getLocationService} from '../services/locationService';
-import AppText from '../components/AppText';
-import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+
+import AppText from '../components/AppText';
+import {fetchLocation, fetchMoreLocation} from '../store/locationState';
+import ListItem from '../components/ListItem';
 
 const Location = () => {
-  const [location, setLocation] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadmore, setLoadmore] = useState(false);
-  const [nextURL, setNextURL] = useState('');
   const [refresh, setRefresh] = useState(false);
   const {navigate} = useNavigation();
+  const {list, loading, loadMore, next} = useSelector(state => state.location);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getLocation();
+    dispatch(fetchLocation());
   }, []);
 
   const handelRefresh = () => {
     setRefresh(true);
-    getLocation();
+    dispatch(fetchLocation());
     setRefresh(false);
   };
 
-  const getLocation = async () => {
-    setLoading(true);
-    try {
-      const {data} = await getLocationService();
-
-      if (data.results) {
-        setLocation(data.results);
-      }
-      data.info.next ? setNextURL(data.info.next) : setNextURL(null);
-    } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1: error?.response?.data?.error ?? 'Error occured',
-      });
-    }
-    setLoading(false);
-  };
-
-  const loadMore = async () => {
-    setLoadmore(true);
-    if (nextURL !== null) {
-      try {
-        const res = await axios.get(nextURL.replace('http:', 'https:'), {});
-        const {results} = res.data;
-        if (results.length > 0) setLocation([...location, ...results]);
-        setNextURL(res.data.info.next);
-        setLoadmore(false);
-      } catch (err) {
-        setLoadmore(false);
-        console.log('load more error:', err);
-      }
-    } else {
-      setLoadmore(false);
-    }
+  const loadMoreFunc = async () => {
+    if (next != null)
+      dispatch(fetchMoreLocation(next.replace('http:', 'https:')));
   };
 
   return (
@@ -73,12 +35,12 @@ const Location = () => {
       ) : (
         <>
           <FlatList
-            data={location}
+            data={list}
             style={{
               flexGrow: 1,
             }}
             onEndReached={() => {
-              loadMore();
+              loadMoreFunc();
             }}
             ListHeaderComponent={
               <AppText
@@ -93,59 +55,20 @@ const Location = () => {
             }
             onEndReachedThreshold={0.7}
             renderItem={({item}) => (
-              <TouchableOpacity
-                onPress={() => navigate('Characters', {item})}
-                style={styles.locationContainer}>
-                <AppText
-                  font={{
-                    color: '#156900',
-                    fontWeight: '600',
-                    fontFamily: 'serif',
-                    fontSize: 18,
-                  }}>
-                  {item.name}
-                </AppText>
-                <AppText
-                  font={{
-                    color: 'black',
-                    fontWeight: '200',
-                    fontFamily: 'serif',
-                    fontSize: 14,
-                  }}>
-                  {item.type}
-                </AppText>
-                <AppText
-                  font={{
-                    color: 'black',
-                    fontWeight: '200',
-                    fontFamily: 'serif',
-                    fontSize: 14,
-                  }}>
-                  {item.dimension}
-                </AppText>
-                <AppText
-                  font={{
-                    color: 'black',
-                    fontWeight: '200',
-                    fontFamily: 'serif',
-                    fontSize: 14,
-                  }}>
-                  Number of residents {item.residents?.length}
-                </AppText>
-              </TouchableOpacity>
+              <ListItem item={item} navigate={navigate} />
             )}
             keyExtractor={item => item.id.toString()}
             removeClippedSubviews={true}
-            // initialNumToRender={2} // Reduce initial render amount
+            initialNumToRender={2} // Reduce initial render amount
             // maxToRenderPerBatch={1} // Reduce number in each render batch
             refreshing={refresh}
             onRefresh={handelRefresh}
           />
 
-          {loadmore && (
+          {loadMore && (
             <ActivityIndicator
               style={{marginBottom: 70}}
-              animating={loadmore}
+              animating={loadMore}
               size={35}
               color="green"
             />
@@ -157,12 +80,3 @@ const Location = () => {
 };
 
 export default Location;
-
-const styles = StyleSheet.create({
-  locationContainer: {
-    marginVertical: 10,
-    backgroundColor: 'whitesmoke',
-    padding: 10,
-    borderRadius: 10,
-  },
-});

@@ -29,6 +29,10 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import BottomTabNaviagtion from './src/navigation/BottomTabNaviagtion';
 import Toast from 'react-native-toast-message';
+import {Provider} from 'react-redux';
+import store from './src/store/store';
+import {fetchCharacter, loadCharacters} from './src/store/characterState';
+import * as actions from './src/store/apiAction';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -67,18 +71,20 @@ const App: () => Node = () => {
   };
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <SafeAreaView style={backgroundStyle}>
-        <NavigationContainer>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
-          <BottomTabNaviagtion />
-        </NavigationContainer>
-        <Toast />
-      </SafeAreaView>
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <SafeAreaView style={backgroundStyle}>
+          <NavigationContainer>
+            <StatusBar
+              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+              backgroundColor={backgroundStyle.backgroundColor}
+            />
+            <BottomTabNaviagtion />
+          </NavigationContainer>
+          <Toast />
+        </SafeAreaView>
+      </GestureHandlerRootView>
+    </Provider>
   );
 };
 

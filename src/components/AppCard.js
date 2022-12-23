@@ -1,17 +1,14 @@
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
-import React from 'react';
+import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import React, {memo} from 'react';
 import AppText from './AppText';
 
 const {width} = Dimensions.get('screen');
 
 const AppCard = ({item}) => {
   return (
-    <View
-      style={{marginVertical: 10}}
-      //  style={styles.card}
-    >
+    <View style={{marginVertical: 10}}>
       <Image
-        source={{uri: item.image}}
+        source={{uri: item?.image}}
         style={{
           width: width / 2 - 20,
           height: 220,
@@ -28,20 +25,20 @@ const AppCard = ({item}) => {
             alignSelf: 'center',
             color: '#156900',
           }}>
-          {item.name}
+          {item?.name}
         </AppText>
         <AppText font={{fontSize: 13, alignSelf: 'center'}}>
-          {item.species}, {item.gender}, {item.status}
+          {item?.species}, {item?.gender}, {item?.status}
         </AppText>
         <AppText font={{fontSize: 13, alignSelf: 'center'}}>
-          {item.origin.name}
+          {item?.origin?.name}
         </AppText>
       </View>
     </View>
   );
 };
 
-export default AppCard;
+export default memo(AppCard);
 const styles = StyleSheet.create({
   card: {
     // marginVertical: 10,

@@ -1,8 +1,16 @@
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getLocationService} from '../services/locationService';
 import AppText from '../components/AppText';
 import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
 const Location = () => {
   const [location, setLocation] = useState([]);
@@ -10,6 +18,7 @@ const Location = () => {
   const [loadmore, setLoadmore] = useState(false);
   const [nextURL, setNextURL] = useState('');
   const [refresh, setRefresh] = useState(false);
+  const {navigate} = useNavigation();
 
   useEffect(() => {
     getLocation();
@@ -40,7 +49,6 @@ const Location = () => {
   };
 
   const loadMore = async () => {
-    console.log('called');
     setLoadmore(true);
     if (nextURL !== null) {
       try {
@@ -85,13 +93,9 @@ const Location = () => {
             }
             onEndReachedThreshold={0.7}
             renderItem={({item}) => (
-              <View
-                style={{
-                  marginVertical: 10,
-                  backgroundColor: 'whitesmoke',
-                  padding: 10,
-                  borderRadius: 10,
-                }}>
+              <TouchableOpacity
+                onPress={() => navigate('Characters', {item})}
+                style={styles.locationContainer}>
                 <AppText
                   font={{
                     color: '#156900',
@@ -128,7 +132,7 @@ const Location = () => {
                   }}>
                   Number of residents {item.residents?.length}
                 </AppText>
-              </View>
+              </TouchableOpacity>
             )}
             keyExtractor={item => item.id.toString()}
             removeClippedSubviews={true}
@@ -140,7 +144,7 @@ const Location = () => {
 
           {loadmore && (
             <ActivityIndicator
-              style={{marginVertical: 25}}
+              style={{marginBottom: 70}}
               animating={loadmore}
               size={35}
               color="green"
@@ -153,3 +157,12 @@ const Location = () => {
 };
 
 export default Location;
+
+const styles = StyleSheet.create({
+  locationContainer: {
+    marginVertical: 10,
+    backgroundColor: 'whitesmoke',
+    padding: 10,
+    borderRadius: 10,
+  },
+});

@@ -7,6 +7,12 @@ export const getCharacterService = async () => {
     cancelToken: signal.token,
   });
 };
+export const getSingleCharacterService = async INCOME_URL => {
+  let signal = axios.CancelToken.source();
+  return await axios.get(INCOME_URL, {
+    cancelToken: signal.token,
+  });
+};
 export const searchCharacterService = async (filter, name) => {
   let signal = axios.CancelToken.source();
   return await axios.get(`${URL}character/?${filter}=${name}`, {

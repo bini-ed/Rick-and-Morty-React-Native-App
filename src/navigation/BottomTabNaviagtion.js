@@ -1,23 +1,24 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
-import Rick from '../assets/rick.png';
-import Home from '../assets/home.png';
-import LocationImg from '../assets/location.png';
+import AppColor from '../config/color';
 
 import Location from '../screen/Location';
 import Characters from '../screen/Characters';
 import HomePage from '../screen/HomePage';
+import Iconicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
 function BottomTabNaviagtion() {
   const BottomTab = createBottomTabNavigator();
   return (
     <BottomTab.Navigator
       style={styles.container}
+      initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: 'orange',
-        tabBarInactiveTintColor: 'lightgrey',
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: AppColor.secondary,
         tabBarLabelStyle: {
           fontSize: 14,
           margin: 0,
@@ -27,9 +28,13 @@ function BottomTabNaviagtion() {
         },
         tabBarStyle: [
           {
-            display: 'flex',
+            position: 'absolute',
+            bottom: 20,
+            left: 20,
+            right: 20,
             height: 50,
-            backgroundColor: '#25A1C7',
+            borderRadius: 10,
+            backgroundColor: AppColor.primary,
           },
           null,
         ],
@@ -39,15 +44,27 @@ function BottomTabNaviagtion() {
         component={Characters}
         options={{
           headerShown: false,
-          tabBarIcon: () => (
-            <Image
-              source={Rick}
-              style={{
-                width: 30,
-                height: 30,
-                paddingTop: 10,
-                resizeMode: 'contain',
-              }}></Image>
+          tabBarIcon: ({focused, size, color}) => (
+            <View
+              style={
+                focused
+                  ? {
+                      width: 60,
+                      height: 60,
+                      backgroundColor: focused
+                        ? AppColor.secondary
+                        : AppColor.primary,
+                      borderRadius: 50,
+                      bottom: 15,
+                      borderColor: '#425F57',
+                      borderWidth: 7,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }
+                  : null
+              }>
+              <Iconicons size={size} color={color} name="person"></Iconicons>
+            </View>
           ),
         }}></BottomTab.Screen>
       <BottomTab.Screen
@@ -55,35 +72,28 @@ function BottomTabNaviagtion() {
         component={HomePage}
         options={{
           headerShown: false,
-          tabBarIconStyle: {
-            backgroundColor: 'white',
-            width: 80,
-            height: 80,
-            borderRadius: 50,
+          tabBarIcon: ({size, color, focused}) => {
+            return (
+              <View
+                style={
+                  focused
+                    ? {
+                        width: 60,
+                        height: 60,
+                        backgroundColor: focused ? '#749F82' : '#425F57',
+                        borderRadius: 50,
+                        bottom: 15,
+                        borderColor: '#425F57',
+                        borderWidth: 7,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }
+                    : null
+                }>
+                <FontAwesome size={size} color={color} name="home" />
+              </View>
+            );
           },
-          tabBarIcon: () => (
-            <View
-              style={{
-                width: 70,
-                height: 70,
-                backgroundColor: 'white',
-                borderRadius: 40,
-                bottom: 25,
-                borderColor: '#25A1C7',
-                borderWidth: 5,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image
-                source={Home}
-                style={{
-                  width: 30,
-                  height: 30,
-                  paddingTop: 10,
-                  resizeMode: 'contain',
-                }}></Image>
-            </View>
-          ),
         }}></BottomTab.Screen>
 
       <BottomTab.Screen
@@ -91,15 +101,28 @@ function BottomTabNaviagtion() {
         component={Location}
         options={{
           headerShown: false,
-          tabBarIcon: () => (
-            <Image
-              source={LocationImg}
-              style={{
-                width: 30,
-                height: 30,
-                paddingTop: 10,
-                resizeMode: 'contain',
-              }}></Image>
+          tabBarIcon: ({focused, size, color}) => (
+            <View
+              style={
+                focused
+                  ? {
+                      width: 60,
+                      height: 60,
+                      backgroundColor: focused ? '#749F82' : '#425F57',
+                      borderRadius: 50,
+                      bottom: 15,
+                      borderColor: '#425F57',
+                      borderWidth: 7,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }
+                  : null
+              }>
+              <Iconicons
+                size={size}
+                color={color}
+                name="location-sharp"></Iconicons>
+            </View>
           ),
         }}></BottomTab.Screen>
     </BottomTab.Navigator>

@@ -7,7 +7,10 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+
 import Search from '../assets/search.png';
+import AppColor from '../config/color';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
 export default function AppTextInput({value, onChangeText, handleSearch}) {
   return (
@@ -16,16 +19,11 @@ export default function AppTextInput({value, onChangeText, handleSearch}) {
         style={styles.textInput}
         value={value}
         onChangeText={text => onChangeText(text)}
-        placeholderTextColor="grey"
+        placeholderTextColor="whitesmoke"
         placeholder="Search Characters"></TextInput>
 
       <TouchableOpacity style={styles.searchBtn} onPress={handleSearch}>
-        <Image
-          source={Search}
-          style={{
-            width: 30,
-            height: 30,
-          }}></Image>
+        <FontAwesome name="search" size={25}></FontAwesome>
       </TouchableOpacity>
     </View>
   );
@@ -38,7 +36,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textInput: {
-    backgroundColor: '#CCFFFF',
+    // backgroundColor: '#CCFFFF',
+    backgroundColor: AppColor.primary,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     color: 'grey',
@@ -46,7 +45,8 @@ const styles = StyleSheet.create({
     height: 45,
   },
   searchBtn: {
-    backgroundColor: 'lightblue',
+    // backgroundColor: 'lightblue',
+    backgroundColor: AppColor.secondary,
     height: 45,
     flex: 0.2,
     justifyContent: 'center',

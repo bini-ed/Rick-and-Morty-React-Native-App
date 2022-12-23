@@ -1,25 +1,28 @@
 import {
   View,
-  Text,
   StyleSheet,
   ActivityIndicator,
-  Image,
   Dimensions,
   FlatList,
-  TextInput,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+
+import axios from 'axios';
+import {useRoute} from '@react-navigation/native';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Toast from 'react-native-toast-message';
+
 import {
   getCharacterService,
+  getSingleCharacterService,
   searchCharacterService,
 } from '../services/characterService';
-import axios from 'axios';
+
 import AppCard from '../components/AppCard';
 import AppText from '../components/AppText';
 import AppTextInput from '../components/AppTextInput';
-import DropDownPicker from 'react-native-dropdown-picker';
-import Toast from 'react-native-toast-message';
+import AppColor from '../config/color';
 
 const {width} = Dimensions.get('screen');
 const Characters = () => {
@@ -30,6 +33,7 @@ const Characters = () => {
   const [refresh, setRefresh] = useState(false);
   const [search, setSearch] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
+  const {params} = useRoute();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -39,10 +43,18 @@ const Characters = () => {
     {label: 'Species', value: 'species'},
     {label: 'Gender', value: 'gender'},
   ]);
+  let newPeople = [];
 
   useEffect(() => {
-    search.length == 0 ? getCharacter() : handleSearch();
-  }, []);
+    if (params?.item?.residents?.length) {
+      params?.item?.residents?.map((residents, index) => {
+        getSingleCharacter(residents);
+      });
+      setCharacters(newPeople);
+    } else {
+      search.length == 0 ? getCharacter() : handleSearch();
+    }
+  }, [params?.item?.id]);
 
   const handelRefresh = () => {
     setRefresh(true);
@@ -50,7 +62,24 @@ const Characters = () => {
     setRefresh(false);
   };
 
+  const getSingleCharacter = async INCOME_URL => {
+    setLoading(true);
+    try {
+      const {data} = await getSingleCharacterService(INCOME_URL);
+      if (data) {
+        newPeople.push(data);
+      }
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: error?.response?.data?.error ?? 'Error occured',
+      });
+    }
+    setLoading(false);
+  };
   const getCharacter = async () => {
+    setValue('');
+    setSearch('');
     setLoading(true);
     try {
       const {data} = await getCharacterService();
@@ -127,7 +156,8 @@ const Characters = () => {
             }}>
             <AppText
               font={{
-                color: '#25A1C7',
+                // color: '#25A1C7',
+                color: AppColor.primary,
                 fontSize: 35,
                 fontFamily: 'serif',
                 fontWeight: '500',
@@ -142,12 +172,18 @@ const Characters = () => {
             <AppText
               font={{
                 fontSize: 14,
-                color: '#156900',
+                color: AppColor.primary,
+                fontWeight: '600',
+                paddingHorizontal: 1,
               }}>
               Filter
             </AppText>
             <View style={{flexGrow: 1, flex: 1, zIndex: 100}}>
               <DropDownPicker
+                style={{
+                  borderColor: AppColor.primary,
+                  borderWidth: 1.5,
+                }}
                 placeholder="Sealect Filter"
                 open={open}
                 value={value}
@@ -157,17 +193,27 @@ const Characters = () => {
                 setItems={setItems}
               />
             </View>
-            {search ? (
-              <AppText
-                font={{
-                  fontSize: 14,
-                  color: '#156900',
-                }}>
-                Searching for {search}
-              </AppText>
-            ) : (
-              ''
-            )}
+            <View style={{flexDirection: 'row'}}>
+              {search ? (
+                <AppText
+                  font={{
+                    fontSize: 14,
+                    color: '#156900',
+                  }}>
+                  Searching for {search}
+                </AppText>
+              ) : (
+                ''
+              )}
+
+              {value ? (
+                <AppText> filter by {value} </AppText>
+              ) : params?.item?.residents?.length ? (
+                <AppText> filter by location {params?.item?.name}</AppText>
+              ) : (
+                ''
+              )}
+            </View>
           </View>
           {character.length ? (
             <>
@@ -176,10 +222,11 @@ const Characters = () => {
                 columnWrapperStyle={{justifyContent: 'space-between'}}
                 style={{
                   flexGrow: 1,
+                  marginBottom: 90,
                 }}
                 numColumns={2}
                 onEndReached={() => {
-                  loadMore();
+                  params?.item?.residents?.length ? null : loadMore();
                 }}
                 ListHeaderComponentStyle={{zIndex: 1, backgroundColor: 'red'}}
                 onEndReachedThreshold={0.7}
@@ -194,10 +241,10 @@ const Characters = () => {
 
               {loadmore && (
                 <ActivityIndicator
-                  style={{marginVertical: 25}}
+                  style={{marginBottom: 70}}
                   animating={loadmore}
-                  size={35}
-                  color="green"
+                  size={45}
+                  color={AppColor.primary}
                 />
               )}
             </>

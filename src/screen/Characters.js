@@ -54,6 +54,10 @@ const Characters = () => {
     }
   }, [params?.item?.residents?.length]);
 
+  useEffect(() => {
+    dispatch(characterClear());
+  }, []);
+
   const handelRefresh = () => {
     setRefresh(true);
     navigation.setParams({item: {}});
@@ -154,7 +158,7 @@ const Characters = () => {
               )}
             </View>
           </View>
-          {list.length ? (
+          {list?.length ? (
             <>
               <FlatList
                 data={list}
@@ -169,7 +173,9 @@ const Characters = () => {
                 }}
                 ListHeaderComponentStyle={{zIndex: 1, backgroundColor: 'red'}}
                 onEndReachedThreshold={0.8}
-                renderItem={({item}) => <AppCard item={item} />}
+                renderItem={({item}) => (
+                  <AppCard navigation={navigation} item={item} />
+                )}
                 keyExtractor={(item, index) => index.toString()}
                 removeClippedSubviews={true}
                 initialNumToRender={7} // Reduce initial render amount

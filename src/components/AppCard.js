@@ -1,12 +1,20 @@
-import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React, {memo} from 'react';
 import AppText from './AppText';
 
 const {width} = Dimensions.get('screen');
 
-const AppCard = ({item}) => {
+const AppCard = ({item, navigation}) => {
   return (
-    <View style={{marginVertical: 10}}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('CharacterDetail', {id: item?.id})}
+      style={{marginVertical: 10}}>
       <Image
         source={{uri: item?.image}}
         style={{
@@ -34,7 +42,7 @@ const AppCard = ({item}) => {
           {item?.origin?.name}
         </AppText>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

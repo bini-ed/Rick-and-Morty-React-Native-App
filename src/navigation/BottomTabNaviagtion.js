@@ -9,6 +9,7 @@ import Characters from '../screen/Characters';
 import HomePage from '../screen/HomePage';
 import Iconicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+import CharacterNavigation from './CharacterNavigation';
 
 function BottomTabNaviagtion() {
   const BottomTab = createBottomTabNavigator();
@@ -41,7 +42,7 @@ function BottomTabNaviagtion() {
       }}>
       <BottomTab.Screen
         name="Characters"
-        component={Characters}
+        component={CharacterNavigation}
         options={{
           headerShown: false,
           tabBarIcon: ({focused, size, color}) => (

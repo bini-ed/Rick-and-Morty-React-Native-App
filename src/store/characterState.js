@@ -6,6 +6,7 @@ const slice = createSlice({
   name: 'character',
   initialState: {
     list: [],
+    detail: {},
     next: null,
     loading: false,
     loadMore: false,
@@ -52,6 +53,17 @@ const slice = createSlice({
       character.searchload = false;
       Toast.show({type: 'error', text1: action.payload.error});
     },
+    characterDetailLoading: (character, action) => {
+      character.loading = true;
+    },
+    characterDetailFetch: (character, action) => {
+      character.detail = action.payload;
+      character.loading = false;
+    },
+    characterDetailFailed: (character, action) => {
+      character.loading = false;
+      Toast.show({type: 'error', text1: action.payload.error});
+    },
   },
 });
 
@@ -66,6 +78,9 @@ export const {
   singleCharacterFailed,
   singleCharacterLoading,
   characterClear,
+  characterDetailFailed,
+  characterDetailFetch,
+  characterDetailLoading,
 } = slice.actions;
 export default slice.reducer;
 
@@ -98,4 +113,11 @@ export const getSingleCharacters = INCOME_URL =>
     onStart: singleCharacterLoading.type,
     onSuccess: singleCharacterFetch.type,
     onError: singleCharacterFailed.type,
+  });
+export const getCharacterDetail = id =>
+  apiCallBegan({
+    url: `character/${id}`,
+    onStart: characterDetailLoading.type,
+    onSuccess: characterDetailFetch.type,
+    onError: characterDetailFailed.type,
   });

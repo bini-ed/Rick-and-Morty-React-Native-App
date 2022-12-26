@@ -1,0 +1,383 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Character and Location returns actions Check App card componenet 1`] = `
+<View
+  style={
+    Object {
+      "marginVertical": 10,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 15,
+        "height": 220,
+        "resizeMode": "contain",
+        "width": 355,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "borderRadius": 10,
+        "width": 355,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "#156900",
+            "fontFamily": "serif",
+            "fontSize": 15,
+            "fontWeight": "600",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    >
+      , 
+      , 
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Character and Location returns actions Snapshot 1`] = `
+<View
+  style={
+    Object {
+      "marginVertical": 10,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 15,
+        "height": 220,
+        "resizeMode": "contain",
+        "width": 355,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "borderRadius": 10,
+        "width": 355,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "#156900",
+            "fontFamily": "serif",
+            "fontSize": 15,
+            "fontWeight": "600",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    >
+      , 
+      , 
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Check App card componenet 1`] = `
+<View
+  style={
+    Object {
+      "marginVertical": 10,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 15,
+        "height": 220,
+        "resizeMode": "contain",
+        "width": 355,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "borderRadius": 10,
+        "width": 355,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "#156900",
+            "fontFamily": "serif",
+            "fontSize": 15,
+            "fontWeight": "600",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    >
+      , 
+      , 
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`fetch character actions returns actions Snapshot 1`] = `
+<View
+  style={
+    Object {
+      "marginVertical": 10,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 15,
+        "height": 220,
+        "resizeMode": "contain",
+        "width": 355,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "borderRadius": 10,
+        "width": 355,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "#156900",
+            "fontFamily": "serif",
+            "fontSize": 15,
+            "fontWeight": "600",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    >
+      , 
+      , 
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "black",
+            "fontFamily": "Avenir",
+            "fontSize": 14,
+          },
+          Object {
+            "alignSelf": "center",
+            "fontSize": 13,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`fetch character actions test fetch characters for character page 1`] = `
+Object {
+  "payload": undefined,
+  "type": "character/characterFetch",
+}
+`;
+
+exports[`fetch character actions test search character for 1`] = `
+Object {
+  "payload": Object {
+    "onError": "character/characterFetchFailed",
+    "onStart": "character/characterLoading",
+    "onSuccess": "character/characterFetch",
+    "url": "character/?undefined",
+  },
+  "type": "api/CallBegan",
+}
+`;
+
+exports[`fetch character actions test search character for with params 1`] = `
+Object {
+  "payload": Object {
+    "onError": "character/characterFetchFailed",
+    "onStart": "character/characterLoading",
+    "onSuccess": "character/characterFetch",
+    "url": "character/?[object Object]",
+  },
+  "type": "api/CallBegan",
+}
+`;
+
+exports[`fetch characters for character page 1`] = `
+Object {
+  "payload": undefined,
+  "type": "character/characterFetch",
+}
+`;
